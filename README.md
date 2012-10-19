@@ -1,0 +1,4 @@
+wotclient
+=========
+
+distributed wot client
