@@ -20,9 +20,13 @@ class contract:
         description = pDescription
         liability = pLiability
         
-    def GeneratePacket(self, entity,email, defname, deftype):
+    def GeneratePacket(self, entity,email, kvpList):
         top = Element('OTCTrustContract')
         entity = SubElement(top, 'entity',{'Name':entity,'E-Mail':email})
-        definition = SubElement(top, 'definiition',{'Name':defname,'Type':deftype})
+		#definitions should be passed in as a list of key value pairs, allowing for more dynamic creation of packets
+		for i in kvpList:
+			for kvp in i:
+				definition = SubElement(top, 'definiition',{'Name':kvp.key,'Type':kvp.value})
+        
         
         print tostring(top)
